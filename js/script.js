@@ -79,20 +79,23 @@ function render() {
   console.log(`Yesterday cases: ${yesterdayCases}`);
 
   for (let i = 0; i < todayCases.length; i++) {
-    let yesterdayDeaths = 0,
-      yesterdayQuantityCases = 0;
+    let { uf, cases, deaths } = todayCases[i];
+    let newDeaths = 0,
+      newCases = 0;
     if (yesterdayCases.lenght > 1) {
-      yesterdayDeaths = yesterdayCases[i];
-      yesterdayQuantityCases = yesterdayCases[i];
+      newDeaths = deaths - yesterdayCases[i].deaths;
+      newCases = cases - yesterdayCases[i].cases;
+    } else {
+      newDeaths = '-';
+      newCases = '-';
     }
 
-    let { uf, cases, deaths } = todayCases[i];
     innerHTML += `  <tr>
     <th scope="row">${uf}</th>
     <td>${cases}</td>
-    <td>${cases - yesterdayQuantityCases}</td>
+    <td>${newCases}</td>
     <td>${deaths}</td>
-    <td>${deaths - yesterdayDeaths}</td>
+    <td>${newDeaths}</td>
     <td>${Intl.NumberFormat('pt-BR').format(
       (deaths / totalDeaths) * 100
     )} %</td>
