@@ -92,9 +92,9 @@ function render() {
 
     innerHTML += `  <tr>
     <th scope="row">${uf}</th>
-    <td>${cases}</td>
+    <td>${format(cases)}</td>
     <td>${newCases}</td>
-    <td>${deaths}</td>
+    <td>${format(deaths)}</td>
     <td>${newDeaths}</td>
     <td>${Intl.NumberFormat('pt-BR').format(
       (deaths / totalDeaths) * 100
@@ -104,4 +104,8 @@ function render() {
   }
   const table = document.querySelector('#table');
   table.innerHTML = innerHTML;
+}
+
+function format(s) {
+  return Intl.NumberFormat('pt-BR').format(s);
 }
